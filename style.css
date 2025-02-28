@@ -1,0 +1,176 @@
+/* --------------------- */
+/* 1. CSS Variables      */
+/* --------------------- */
+:root {
+    /* Light Theme Colors */
+    --body-bg: linear-gradient(135deg, #f9e7fe, #b6e6fe);
+    --calc-bg: rgba(255, 255, 255, 0.7);
+    --screen-bg: #ffffffcc;
+    --screen-text: #333;
+    --button-bg: #ffffffdd;
+    --button-text: #333;
+    --button-shadow: rgba(0, 0, 0, 0.1);
+    --operator-bg: #ffb2b2dd; /* Pinkish for operators */
+    --operator-text: #333;
+    --equal-bg: #ff76a1;
+    --equal-text: #fff;
+  }
+  
+  body.dark-theme {
+    /* Dark Theme Colors */
+    --body-bg: linear-gradient(135deg, #120824, #2b2b4f);
+    --calc-bg: rgba(0, 0, 0, 0.4);
+    --screen-bg: #2f2f2fcc;
+    --screen-text: #f9f9f9;
+    --button-bg: #4e4e4e;
+    --button-text: #f5f5f5;
+    --button-shadow: rgba(0, 0, 0, 0.6);
+    --operator-bg: #ff90ab;
+    --operator-text: #fff;
+    --equal-bg: #ff5896;
+    --equal-text: #fff;
+  }
+  
+  /* --------------------- */
+  /* 2. Global Reset       */
+  /* --------------------- */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Body with a pastel or dark gradient background */
+  body {
+    min-height: 100vh;
+    background: var(--body-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.5s ease;
+  }
+  
+  /* --------------------- */
+  /* 3. Theme Toggle       */
+  /* --------------------- */
+  .theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .theme-toggle input {
+    display: none;
+  }
+  
+  .toggle-label {
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background: #ddd;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .toggle-circle {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+  
+  /* When checked, move circle to the right, change background color */
+  #toggleSwitch:checked + .toggle-label {
+    background: #4b0082;
+  }
+  
+  #toggleSwitch:checked + .toggle-label .toggle-circle {
+    transform: translateX(30px);
+  }
+  
+  /* --------------------- */
+  /* 4. Calculator Styles  */
+  /* --------------------- */
+  .calculator {
+    background: var(--calc-bg);
+    border-radius: 25px;
+    padding: 20px;
+    width: 340px;
+    box-shadow: 0 8px 20px var(--button-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background 0.5s ease;
+  }
+  
+  /* Screen styling */
+  #screen {
+    background: var(--screen-bg);
+    color: var(--screen-text);
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 2rem;
+    text-align: right;
+    margin-bottom: 20px;
+    min-height: 60px;
+    overflow-x: auto;
+    transition: background 0.5s ease, color 0.5s ease;
+  }
+  
+  /* Keypad grid */
+  #keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
+  
+  /* Buttons */
+  #keypad button {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 50px; /* Round/bubble style */
+    font-size: 1.4rem;
+    padding: 15px 0;
+    box-shadow: 0 5px 10px var(--button-shadow);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s, color 0.3s;
+  }
+  
+  #keypad button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px var(--button-shadow);
+  }
+  
+  /* Operator buttons have a distinct color */
+  .operator {
+    background: var(--operator-bg);
+    color: var(--operator-text);
+  }
+  
+  /* Equal button for emphasis */
+  .equal {
+    background: var(--equal-bg) !important;
+    color: var(--equal-text) !important;
+  }
+  
+  /* Blank button for layout spacing if needed */
+  .blank {
+    background: transparent;
+    cursor: default;
+    box-shadow: none;
+  }
+  
+  /* Pressed state */
+  #keypad button:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 3px 6px var(--button-shadow);
+  }
+  
